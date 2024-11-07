@@ -1,0 +1,29 @@
+pragma solidity ^0.8.0;
+
+contract Student 
+{
+    struct StudentData 
+    {
+        uint rollNo;
+        string name;
+    }
+
+    StudentData[] public students;
+
+    function addStudent(uint rollNo, string memory name) public 
+    {
+        students.push(StudentData(rollNo, name));
+    }
+
+    function getStudent(uint _rollNo) public view returns (uint rollNo, string memory name) 
+    {
+        for(uint i = 0; i < students.length; i++) 
+        {
+            if(students[i].rollNo == _rollNo) 
+            {
+                return (students[i].rollNo, students[i].name);
+            }
+        }
+        revert("Student not found");
+    }
+}
